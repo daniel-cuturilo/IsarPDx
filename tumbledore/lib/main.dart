@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
@@ -17,17 +16,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     /// Global widget for our app
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'ISARPDx',
       debugShowCheckedModeBanner: false,
 
       /// Our custom theme colors
       theme: ThemeData(
-        primaryColor: Colors.orange.shade300,
-        scaffoldBackgroundColor: Colors.grey.shade800,
+        primaryColor: Colors.amber,
+        scaffoldBackgroundColor: Colors.white,
       ),
 
       /// The main page
-      home: MyHomePage(title: 'AIbus TUMbledore'),
+      home: MyHomePage(title: 'Klinikum rechts der Isar'),
     );
   }
 }
@@ -121,6 +120,15 @@ class _MyHomePageState extends State<MyHomePage> {
       /// The top app bar with title
       appBar: AppBar(
         title: Text(widget.title),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+            onPressed: () {},
+          )
+        ],
       ),
       body: Column(
         children: [
@@ -128,13 +136,19 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
             child: ListView(
               padding: const EdgeInsets.all(20.0),
-              reverse: true, // makes it 'stick' to the bottom when sending new messages
+              reverse:
+                  true, // makes it 'stick' to the bottom when sending new messages
               children: messages.reversed.map((message) {
                 return Bubble(
                   child: Text(message.text),
-                  color: message.byMe ? Colors.orange.shade300 : Colors.grey.shade300,
-                  nip: message.byMe ? BubbleNip.rightBottom : BubbleNip.leftBottom,
-                  alignment: message.byMe ? Alignment.topRight : Alignment.topLeft,
+                  color: message.byMe
+                      ? Colors.orange.shade300
+                      : Colors.grey.shade300,
+                  nip: message.byMe
+                      ? BubbleNip.rightBottom
+                      : BubbleNip.leftBottom,
+                  alignment:
+                      message.byMe ? Alignment.topRight : Alignment.topLeft,
                   margin: BubbleEdges.symmetric(vertical: 5),
                 );
               }).toList(),
