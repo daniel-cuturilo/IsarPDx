@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
@@ -16,17 +17,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     /// Global widget for our app
     return MaterialApp(
-      title: 'ISARPDx',
+      title: 'IsarPDX',
+
       debugShowCheckedModeBanner: false,
 
       /// Our custom theme colors
       theme: ThemeData(
-        primaryColor: Colors.amber,
-        scaffoldBackgroundColor: Colors.white,
+        primaryColor: Colors.blue,
+        scaffoldBackgroundColor: Colors.black,
       ),
 
       /// The main page
-      home: MyHomePage(title: 'Klinikum rechts der Isar'),
+      home: MyHomePage(title: 'IsarPDX'),
     );
   }
 }
@@ -84,6 +86,68 @@ class _MyHomePageState extends State<MyHomePage> {
         "Human: $message\n"
         "AI:";
 
+//     ///shruti code
+// // This is the API request for Semantic Search
+
+// // This variable will hold the sections of the documentation.
+// // In this example the text in the textarea above will be imported and
+// // divided into an array using the "###" tag as the split indicator.
+// var documents;
+
+// // This variable will hold the scores for each section returned by the Semantic Search API
+// var scores;
+// var inputQuestion;
+
+// function apiScore(){
+
+//     // This splits the text in the textarea into a list of text blocks and removes surrounding white space
+//     documents = inputDocuments.value.split("###").map(Function.prototype.call, String.prototype.trim);
+
+//     // Clear the textarea
+//     inputDocuments.value = "";
+
+//     // The engine to use for Semantic Search
+//     var selectedEngine = "babbage";
+
+//     // The information we're sending to the API: An array of documents and the question as the query
+//     var _data = {
+//                     "documents": documents,
+//                     "query": inputQuestion.value
+//                 };
+
+//     // The header for the request
+//     var _headers = {
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json',
+//         'Authorization': `Bearer ${apiKeyInput.value}`
+//     };
+
+//     // Our jquery request
+//     $.ajax({
+//     type:'POST',
+//     url: `https://api.openai.com/v1/engines/${selectedEngine}/search`,
+//     dataType:'JSON',
+//     headers: _headers,
+//     data: JSON.stringify(_data),
+//         success:function(result){
+
+//             // Assigning the result data to the scores variable to be used later
+//             scores = result.data;
+
+//             // Displaying the results in the document textarea
+//             result.data.forEach(element => {
+//                 var _doc = documents[element.document];
+//                 var _score = "Document: " + element.document + "\nScore: " + element.score + "\n----------------\n" + _doc + "\n\n";
+//                 inputDocuments.value += _score;
+//             });
+
+//         }
+//     });
+
+//     }
+
+// }
+
     /// Make the api request to OpenAI
     /// See available api parameters here: https://beta.openai.com/docs/api-reference/completions/create
     var result = await http.post(
@@ -96,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: jsonEncode({
         "prompt": prompt,
         "max_tokens": 100,
-        "temperature": 0,
+        "temperature": 0.7,
         "top_p": 1,
         "stop": "\n",
       }),
@@ -123,7 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.settings,
+              Icons.call,
               color: Colors.white,
             ),
             onPressed: () {},
