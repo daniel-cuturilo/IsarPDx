@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  audio_recorder:
+  speech_to_text:
   flutter:
     sdk: flutter
   bubble: ^1.2.1
